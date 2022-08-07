@@ -1,3 +1,15 @@
 @tailwind base;
 @tailwind components;
 @tailwind utilities;
+
+html {
+  font-size: 18px;
+}
+
+#__next {
+  @apply bg-gray-50;
+
+  display: flex;
+  flex-direction: column;
+  min-height: 100vh;
+}
