@@ -37,5 +37,5 @@ module.exports = {
   rules: {
     "prettier/prettier": ["error"],
   },
-  ignorePatterns: ["**/*.js", "**/*.json", ".next", "public"],
+  ignorePatterns: ["**/*.json", ".next", "public"],
 };
