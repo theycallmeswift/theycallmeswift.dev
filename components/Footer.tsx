@@ -16,7 +16,7 @@ const Copyright = () => (
 );
 
 const FooterLink: React.FC<AnchorProps> = ({ href, children }) => {
-  const className = "text-sm text-gray-500 hover:text-gray-600 transition";
+  const className = "text-xs text-gray-500 hover:text-gray-600 transition";
 
   if (!href || href.startsWith("/") || href.startsWith("#")) {
     return (
@@ -56,6 +56,7 @@ const Footer: React.FC<FooterProps> = () => {
           <FooterLink href="/">Home</FooterLink>
           <FooterLink href="/about">About</FooterLink>
           <FooterLink href="/newsletter">Subscribe</FooterLink>
+          <FooterLink href="/contact">Contact</FooterLink>
         </FooterColumn>
         <FooterColumn>
           <FooterLink href="https://github.com/theycallmeswift/">
