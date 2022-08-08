@@ -1,15 +1,12 @@
 import type { NextPage } from "next";
 
-import { Suspense } from "react";
-import Container from "components/Container";
+import DefaultLayout from "layouts/DefaultLayout";
 
 const Home: NextPage = () => {
   return (
-    <Suspense>
-      <Container>
-        <h1>Hello World</h1>
-      </Container>
-    </Suspense>
+    <DefaultLayout>
+      <h1>Hello World</h1>
+    </DefaultLayout>
   );
 };
 

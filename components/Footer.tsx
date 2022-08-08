@@ -1,9 +1,17 @@
 import type { HTMLAttributes } from "react";
+import type { LinkProps } from "components/Link";
 
-import Link from "next/link";
+import Link from "components/Link";
 
 export type FooterProps = HTMLAttributes<HTMLElement>;
-type AnchorProps = React.AnchorHTMLAttributes<HTMLAnchorElement>;
+
+const FooterLink = ({ href, ...props }: LinkProps) => (
+  <Link
+    href={href}
+    className="text-xs text-gray-500 hover:text-gray-600"
+    {...props}
+  />
+);
 
 const FooterColumn = ({ children }) => {
   return <div className="flex flex-col space-y-4">{children}</div>;
@@ -14,29 +22,6 @@ const Copyright = () => (
     &copy; 2012-present Mike Swift. All Rights Reserved.
   </p>
 );
-
-const FooterLink: React.FC<AnchorProps> = ({ href, children }) => {
-  const className = "text-sm text-gray-500 hover:text-gray-600 transition";
-
-  if (!href || href.startsWith("/") || href.startsWith("#")) {
-    return (
-      <Link href={href as string}>
-        <a className={className}>{children}</a>
-      </Link>
-    );
-  } else {
-    return (
-      <a
-        href={href}
-        className={className}
-        target="_blank"
-        rel="noopener noreferrer"
-      >
-        {children}
-      </a>
-    );
-  }
-};
 
 const Footer: React.FC<FooterProps> = () => {
   return (
@@ -56,6 +41,7 @@ const Footer: React.FC<FooterProps> = () => {
           <FooterLink href="/">Home</FooterLink>
           <FooterLink href="/about">About</FooterLink>
           <FooterLink href="/newsletter">Subscribe</FooterLink>
+          <FooterLink href="/contact">Contact</FooterLink>
         </FooterColumn>
         <FooterColumn>
           <FooterLink href="https://github.com/theycallmeswift/">
