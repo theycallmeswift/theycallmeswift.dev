@@ -12,12 +12,14 @@ const Container: React.FC<ContainerProps> = ({
   el = "main",
   ...props
 }) => {
-  const defaultClassName =
-    "flex flex-col justify-center items-start max-w-2xl mx-auto px-8 pb-16";
+  const rootClassName = clsx(
+    "flex flex-col justify-center items-start max-w-2xl mx-auto px-8 pb-16",
+    className
+  );
   const Component = el as ComponentType<React.HTMLAttributes<HTMLElement>>;
 
   return (
-    <Component className={clsx(className, defaultClassName)} {...props}>
+    <Component className={rootClassName} {...props}>
       {children}
     </Component>
   );

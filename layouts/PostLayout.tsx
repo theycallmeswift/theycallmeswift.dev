@@ -6,6 +6,7 @@ import Head from "components/Head";
 import { urlForImage } from "lib/sanity";
 import Image from "next/future/image";
 import { Suspense } from "react";
+import readingTime from "reading-time";
 
 interface PostLayoutProps {
   children?: React.ReactNode;
@@ -13,6 +14,7 @@ interface PostLayoutProps {
 }
 
 const PostLayout = ({ children, post }: PostLayoutProps) => {
+  const readingTimeText = readingTime(post.content).text;
   const humanReadableDate = new Date(post.publishDate).toLocaleString("en-us", {
     month: "short",
     year: "numeric",
@@ -43,7 +45,7 @@ const PostLayout = ({ children, post }: PostLayoutProps) => {
               />
               <p>Mike Swift / {humanReadableDate}</p>
             </div>
-            <p>18 Minute Read</p>
+            <p>{readingTimeText}</p>
           </div>
           <div className="mt-4 prose">{children}</div>
         </article>

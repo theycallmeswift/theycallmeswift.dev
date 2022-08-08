@@ -1,11 +1,17 @@
 import type { NextPage, GetStaticProps, GetStaticPaths } from "next";
 import type { Post } from "lib/types";
 
+import { mdxToHTML, mdxComponents } from "lib/mdx";
 import PostLayout from "layouts/PostLayout";
 import { sanityClient } from "lib/sanity";
+import { MDXRemote } from "next-mdx-remote";
 
 const Post: NextPage = ({ post }: { post: Post }) => {
-  return <PostLayout post={post}>{post.content}</PostLayout>;
+  return (
+    <PostLayout post={post}>
+      <MDXRemote {...post.html} components={mdxComponents} />
+    </PostLayout>
+  );
 };
 
 export const getStaticPaths: GetStaticPaths = async () => {
@@ -40,9 +46,14 @@ export const getStaticProps: GetStaticProps = async ({ params }) => {
     return { notFound: true };
   }
 
+  const html = await mdxToHTML(post.content);
+
   return {
     props: {
-      post,
+      post: {
+        ...post,
+        html,
+      },
     },
   };
 };
