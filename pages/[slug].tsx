@@ -1,48 +1,39 @@
-import type { NextPage } from "next";
+import type { NextPage, GetStaticProps, GetStaticPaths } from "next";
+import type { Post } from "lib/types";
 
-import { Suspense } from "react";
-import Container from "components/Container";
-import { sanityClient } from "lib/sanity-server";
+import PostLayout from "layouts/PostLayout";
+import { sanityClient } from "lib/sanity";
 
-const postFields = `
-  _id,
-  title,
-  publishDate,
-  excerpt,
-  coverImage,
-  "slug": slug.current,
-`;
-
-const postQuery = `
-{
-  "post": *[_type == "post" && slug.current == $slug] | order(_updatedAt desc) [0] {
-    content,
-    ${postFields}
-  }
-}`;
-
-const Post: NextPage = ({ post }) => {
-  return (
-    <Suspense>
-      <Container>{JSON.stringify(post)}</Container>
-    </Suspense>
-  );
+const Post: NextPage = ({ post }: { post: Post }) => {
+  return <PostLayout post={post}>{post.content}</PostLayout>;
 };
 
-export const getStaticPaths = async () => {
-  const paths: string[] = await sanityClient.fetch(
-    '*[_type == "post" && defined(slug.current)][].slug.current'
-  );
+export const getStaticPaths: GetStaticPaths = async () => {
+  const allPostSlugsQuery =
+    '*[_type == "post" && defined(slug.current)][].slug.current';
+  const paths: string[] = await sanityClient.fetch(allPostSlugsQuery);
 
   return {
     paths: paths.map((slug) => ({ params: { slug } })),
-    fallback: false,
+    fallback: "blocking",
   };
 };
 
-export const getStaticProps = async ({ params }) => {
-  const { post } = await sanityClient.fetch(postQuery, {
-    slug: params.slug,
+export const getStaticProps: GetStaticProps = async ({ params }) => {
+  const postBySlugQuery = `{
+    "post": *[_type == "post" && slug.current == $slug] | order(_updatedAt desc) [0] {
+      content,
+      _id,
+      title,
+      publishDate,
+      excerpt,
+      coverImage,
+      "slug": slug.current,
+    }
+  }`;
+
+  const { post }: { post: Post } = await sanityClient.fetch(postBySlugQuery, {
+    slug: params?.slug,
   });
 
   if (!post) {

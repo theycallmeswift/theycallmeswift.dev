@@ -1,3 +1,6 @@
+import type { Image } from "@sanity/types";
+
+import createImageUrlBuilder from "@sanity/image-url";
 import { createClient } from "next-sanity";
 
 const sanityConfig = {
@@ -8,3 +11,6 @@ const sanityConfig = {
 };
 
 export const sanityClient = createClient(sanityConfig);
+
+export const urlForImage = (source: Image) =>
+  createImageUrlBuilder(sanityClient).image(source).auto("format").fit("max");

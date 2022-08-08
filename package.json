@@ -10,6 +10,8 @@
     "sanity-start": "sanity start"
   },
   "dependencies": {
+    "@sanity/image-url": "^1.0.1",
+    "clsx": "^1.2.1",
     "next": "12.2.4",
     "next-sanity": "^0.6.0",
     "react": "18.2.0",
