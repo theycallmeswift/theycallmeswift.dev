@@ -32,22 +32,24 @@ const PostLayout = ({ children, post }: PostLayoutProps) => {
       />
       <Container>
         <article className="w-full">
-          <h1>{post.title}</h1>
+          <h1 className="mb-4 text-3xl text-black">{post.title}</h1>
           <div className="flex flex-row items-center justify-between">
             <div className="flex items-center">
               <Image
                 alt="Mike Swift"
-                height={36}
-                width={36}
+                height={24}
+                width={24}
                 sizes="20vw"
                 src="/avatar.jpg"
                 className="rounded-full"
               />
-              <p>Mike Swift / {humanReadableDate}</p>
+              <p className="text-sm ml-2 text-gray-700">
+                Mike Swift • {humanReadableDate}
+              </p>
             </div>
-            <p>{readingTimeText}</p>
+            <p className="text-sm text-gray-700">{readingTimeText}</p>
           </div>
-          <div className="mt-4 prose">{children}</div>
+          <div className="mt-6 prose">{children}</div>
         </article>
         <Footer />
       </Container>

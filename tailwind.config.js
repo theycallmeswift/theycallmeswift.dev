@@ -2,6 +2,8 @@
  * @type {import('tailwindcss').Config}
  */
 
+const { fontFamily } = require("tailwindcss/defaultTheme");
+
 module.exports = {
   content: [
     "./pages/**/*.{jsx,tsx}",
@@ -9,7 +11,12 @@ module.exports = {
     "./layouts/**/*.{jsx,tsx}",
   ],
   theme: {
-    extend: {},
+    extend: {
+      fontFamily: {
+        sans: ["Lora", ...fontFamily.sans],
+        serif: ["Lustria", ...fontFamily.serif],
+      },
+    },
   },
   plugins: [require("@tailwindcss/typography")],
 };
