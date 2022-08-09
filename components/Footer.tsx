@@ -1,6 +1,7 @@
 import type { HTMLAttributes } from "react";
 import type { LinkProps } from "components/Link";
 
+import config from "config/site.config.json";
 import Link from "components/Link";
 
 export type FooterProps = HTMLAttributes<HTMLElement>;
@@ -19,7 +20,7 @@ const FooterColumn = ({ children }) => {
 
 const Copyright = () => (
   <p className="text-xs text-gray-400">
-    &copy; 2012-present Mike Swift. All Rights Reserved.
+    &copy; 2012-present {config.site.author}. All Rights Reserved.
   </p>
 );
 

@@ -1,5 +1,6 @@
 import type { HTMLAttributes } from "react";
 
+import config from "config/site.config.json";
 import NextHead from "next/head";
 import { useRouter } from "next/router";
 
@@ -11,20 +12,6 @@ type HeadProps = {
   image?: string;
   type?: "website" | "article";
   publishDate?: string;
-};
-
-const config = {
-  site: {
-    name: "They call me Swift.",
-    url: "https://theycallmeswift.dev",
-    twitter: "@SwiftAlphaOne",
-  },
-  defaults: {
-    description:
-      "The personal website and blog of a hacker, founder, and hackathon enthusiast.",
-    image: "https://dummyimage.com/1200x630/fff/aaa", // TODO: Generate image
-    type: "website",
-  },
 };
 
 const Head = ({ title, description, image, type, publishDate }: HeadProps) => {
