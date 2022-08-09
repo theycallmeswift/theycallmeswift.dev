@@ -3,6 +3,7 @@ import type { Post } from "lib/types";
 import Container from "components/Container";
 import Footer from "components/Footer";
 import Head from "components/Head";
+import Navbar from "components/Navbar";
 import { urlForImage } from "lib/sanity";
 import Image from "next/future/image";
 import { Suspense } from "react";
@@ -31,8 +32,9 @@ const PostLayout = ({ children, post }: PostLayoutProps) => {
         publishDate={new Date(post.publishDate).toISOString()}
       />
       <Container>
+        <Navbar />
         <article className="w-full">
-          <h1 className="mb-4 text-3xl text-black">{post.title}</h1>
+          <h1 className="mb-4 text-3xl text-black font-bold">{post.title}</h1>
           <div className="flex flex-row items-center justify-between">
             <div className="flex items-center">
               <Image
