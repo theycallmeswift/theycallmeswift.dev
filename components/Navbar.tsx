@@ -27,7 +27,7 @@ const Navbar: React.FC = () => {
     return () => {
       clearTimeout(logoTimer);
     };
-  });
+  }, []);
 
   return (
     <nav className="flex items-center justify-between w-full mx-auto pt-8 pb-16">
