@@ -4,7 +4,7 @@ import Container from "components/Container";
 import Footer from "components/Footer";
 import Head from "components/Head";
 import Navbar from "components/Navbar";
-import { urlForImage } from "lib/sanity";
+import { urlForImage, humanReadableDate } from "lib/sanity";
 import Image from "next/future/image";
 import { Suspense } from "react";
 import readingTime from "reading-time";
@@ -16,11 +16,6 @@ interface PostLayoutProps {
 
 const PostLayout = ({ children, post }: PostLayoutProps) => {
   const readingTimeText = readingTime(post.content).text;
-  const humanReadableDate = new Date(post.publishDate).toLocaleString("en-us", {
-    month: "short",
-    year: "numeric",
-    day: "numeric",
-  });
 
   return (
     <Suspense>
@@ -31,7 +26,7 @@ const PostLayout = ({ children, post }: PostLayoutProps) => {
         image={urlForImage(post.coverImage).url()}
         publishDate={new Date(post.publishDate).toISOString()}
       />
-      <Container>
+      <Container className="px-8 pb-16">
         <Navbar />
         <article className="w-full">
           <h1 className="mb-4 text-3xl text-black font-bold">{post.title}</h1>
@@ -46,7 +41,7 @@ const PostLayout = ({ children, post }: PostLayoutProps) => {
                 className="rounded-full"
               />
               <p className="text-sm ml-2 text-gray-700">
-                Mike Swift • {humanReadableDate}
+                Mike Swift • {humanReadableDate(post.publishDate)}
               </p>
             </div>
             <p className="text-sm text-gray-700">{readingTimeText}</p>

@@ -13,7 +13,7 @@ const Container: React.FC<ContainerProps> = ({
   ...props
 }) => {
   const rootClassName = clsx(
-    "flex flex-col justify-center items-start w-full max-w-2xl mx-auto px-8 pb-16",
+    "flex flex-col justify-center items-start w-full max-w-2xl mx-auto",
     className
   );
   const Component = el as ComponentType<React.HTMLAttributes<HTMLElement>>;

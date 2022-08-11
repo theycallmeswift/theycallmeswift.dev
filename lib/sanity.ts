@@ -14,3 +14,10 @@ export const sanityClient = createClient(sanityConfig);
 
 export const urlForImage = (source: Image) =>
   createImageUrlBuilder(sanityClient).image(source).auto("format").fit("max");
+
+export const humanReadableDate = (source: string) =>
+  new Date(source).toLocaleString("en-us", {
+    month: "short",
+    year: "numeric",
+    day: "numeric",
+  });

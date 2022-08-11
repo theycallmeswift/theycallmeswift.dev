@@ -12,7 +12,7 @@ const DefaultLayout = ({ children }: DefaultLayoutProps) => {
   return (
     <Suspense>
       <Head />
-      <Container>
+      <Container className="px-8 pb-16">
         <Navbar />
         {children}
         <Footer />
