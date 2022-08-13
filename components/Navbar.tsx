@@ -2,9 +2,9 @@ import type { LinkProps } from "components/Link";
 
 import clsx from "clsx";
 import Link from "components/Link";
-import Image from "next/future/image";
+import Logo from "components/Logo";
+import MobileMenu from "components/MobileMenu";
 import { useRouter } from "next/router";
-import { useEffect, useState } from "react";
 
 const NavLink = ({ href, ...props }: LinkProps) => {
   const router = useRouter();
@@ -18,49 +18,19 @@ const NavLink = ({ href, ...props }: LinkProps) => {
 };
 
 const Navbar: React.FC = () => {
-  const [isHovering, setIsHovered] = useState(true);
-  const onMouseEnter = () => setIsHovered(true);
-  const onMouseLeave = () => setIsHovered(false);
-
-  useEffect(() => {
-    const logoTimer = setTimeout(() => setIsHovered(false), 2000);
-
-    return () => {
-      clearTimeout(logoTimer);
-    };
-  }, []);
-
   return (
-    <nav className="flex items-center justify-between w-full mx-auto pt-4 md:pt-8 pb-8 md:pb-16">
+    <nav className="flex relative items-center justify-between w-full mx-auto pt-4 md:pt-8 pb-8 md:pb-16">
       <div className="flex items-end">
-        <Link href="/" onMouseEnter={onMouseEnter} onMouseLeave={onMouseLeave}>
-          {isHovering ? (
-            <Image
-              alt="Glider Logo"
-              height={20}
-              width={20}
-              sizes="20vw"
-              src="/logo.gif"
-              className="inline-block mr-6"
-            />
-          ) : (
-            <Image
-              alt="Glider Logo"
-              height={20}
-              width={20}
-              sizes="20vw"
-              src="/logo.png"
-              className="inline-block mr-6"
-            />
-          )}
-        </Link>
+        <Logo />
         <NavLink href="/">Home</NavLink>
         <NavLink href="/posts">Posts</NavLink>
         <NavLink href="/lists">Lists</NavLink>
         <NavLink href="/about">About</NavLink>
-        <NavLink href="/Subscribe">Contact</NavLink>
+        <NavLink href="/contact">Contact</NavLink>
       </div>
-      <div>&nbsp;</div>
+      <div>
+        <MobileMenu />
+      </div>
     </nav>
   );
 };

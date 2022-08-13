@@ -27,7 +27,8 @@ const Home: NextPage = ({ posts }: { posts: Post[] }) => {
           alt="Mike Swift"
           height={375}
           width={375}
-          sizes="20vw"
+          quality={100}
+          priority={true}
           src="/avatar.jpg"
           className="rounded-lg mb-4 sm:mb-0 w-full md:w-44"
         />
