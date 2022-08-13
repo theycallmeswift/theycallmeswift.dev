@@ -55,9 +55,7 @@ const MobileMenu: React.FC = () => {
         <ul className="w-full h-screen z-40 absolute left-0 bg-white pt-4">
           <MobileNavLink href="/">Home</MobileNavLink>
           <MobileNavLink href="/posts">Posts</MobileNavLink>
-          <MobileNavLink href="/lists">Lists</MobileNavLink>
           <MobileNavLink href="/about">About</MobileNavLink>
-          <MobileNavLink href="/contact">Contact</MobileNavLink>
         </ul>
       )}
     </>

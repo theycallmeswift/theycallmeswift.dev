@@ -44,12 +44,9 @@ const Footer: React.FC<FooterProps> = () => {
         </div>
         <FooterColumn>
           <FooterLink href="/posts">Posts</FooterLink>
-          <FooterLink href="/lists">Lists</FooterLink>
           <FooterLink href="/about">About</FooterLink>
-          <FooterLink href="/newsletter">Subscribe</FooterLink>
         </FooterColumn>
         <FooterColumn>
-          <FooterLink href="/contact">Contact</FooterLink>
           <FooterLink href="https://github.com/theycallmeswift/">
             GitHub
           </FooterLink>

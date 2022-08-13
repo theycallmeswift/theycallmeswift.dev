@@ -24,9 +24,7 @@ const Navbar: React.FC = () => {
         <Logo />
         <NavLink href="/">Home</NavLink>
         <NavLink href="/posts">Posts</NavLink>
-        <NavLink href="/lists">Lists</NavLink>
         <NavLink href="/about">About</NavLink>
-        <NavLink href="/contact">Contact</NavLink>
       </div>
       <div>
         <MobileMenu />

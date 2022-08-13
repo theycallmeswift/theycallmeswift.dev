@@ -36,7 +36,7 @@ const Home: NextPage = ({ posts }: { posts: Post[] }) => {
 
       <Container>
         <h2 className="text-lg font-bold mb-4">Recent Posts</h2>
-        <div className="space-y-8">
+        <div className="space-y-12">
           {posts.map((post) => (
             <PostSummary post={post} key={post.slug} />
           ))}

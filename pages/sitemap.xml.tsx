@@ -26,15 +26,7 @@ const fetchAllPostSlugs = (): Promise<string[]> => {
 
 export const getServerSideProps: GetServerSideProps = async ({ res }) => {
   const posts = await fetchAllPostSlugs();
-  const pages = [
-    ...posts,
-    "",
-    "posts",
-    "lists",
-    "about",
-    "contact",
-    "subscribe",
-  ];
+  const pages = [...posts, "", "posts", "about"];
 
   res.setHeader("Content-Type", "text/xml");
   res.setHeader(
