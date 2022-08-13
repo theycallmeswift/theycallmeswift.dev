@@ -1,28 +1,12 @@
 import type { NextPage, GetStaticProps } from "next";
 import type { Post } from "lib/types";
 
-import DefaultLayout from "layouts/DefaultLayout";
-import { sanityClient, humanReadableDate } from "lib/sanity";
-import Image from "next/future/image";
 import Container from "components/Container";
 import Link from "components/Link";
-
-const PostSummary = ({ post }: { post: Post }) => {
-  return (
-    <div className="space-y-5">
-      <div className="flex flex-row items-center justify-between w-full">
-        <h3 className="text-2xl font-bold">
-          <Link href={`/${post.slug}`}>{post.title}</Link>
-        </h3>
-        <span>{humanReadableDate(post.publishDate)}</span>
-      </div>
-      <p className="prose">{post.excerpt}</p>
-      <Link className="underline inline-block" href={`/${post.slug}`}>
-        Read More &rarr;
-      </Link>
-    </div>
-  );
-};
+import PostSummary from "components/PostSummary";
+import DefaultLayout from "layouts/DefaultLayout";
+import { sanityClient } from "lib/sanity";
+import Image from "next/future/image";
 
 const Home: NextPage = ({ posts }: { posts: Post[] }) => {
   return (
@@ -41,11 +25,11 @@ const Home: NextPage = ({ posts }: { posts: Post[] }) => {
         </div>
         <Image
           alt="Mike Swift"
-          height={175}
-          width={175}
+          height={375}
+          width={375}
           sizes="20vw"
           src="/avatar.jpg"
-          className="rounded-lg mb-4 sm:mb-0"
+          className="rounded-lg mb-4 sm:mb-0 w-full md:w-44"
         />
       </div>
 
@@ -62,8 +46,8 @@ const Home: NextPage = ({ posts }: { posts: Post[] }) => {
 };
 
 export const getStaticProps: GetStaticProps = async () => {
-  const indexQuery = `
-    *[_type == "post"] | order(date desc, _updatedAt desc) {
+  const recentPostsQuery = `
+    *[_type == "post"] | order(publishDate desc, _updatedAt desc) [0...3] {
       content,
       _id,
       title,
@@ -73,7 +57,7 @@ export const getStaticProps: GetStaticProps = async () => {
       "slug": slug.current,
     }`;
 
-  const posts: Post[] = await sanityClient.fetch(indexQuery);
+  const posts: Post[] = await sanityClient.fetch(recentPostsQuery);
 
   if (!posts) {
     return { notFound: true };

@@ -9,9 +9,10 @@ import { useEffect, useState } from "react";
 const NavLink = ({ href, ...props }: LinkProps) => {
   const router = useRouter();
   const isActive = router.asPath === href;
-  const rootClassName = clsx("text-sm text-gray-500 hover:text-gray-600 mr-6", {
-    "text-gray-600": isActive,
-  });
+  const rootClassName = clsx(
+    "hidden md:inline-block text-sm text-gray-500 hover:text-gray-600 mr-6",
+    { "text-gray-600": isActive }
+  );
 
   return <Link href={href} className={rootClassName} {...props} />;
 };
@@ -30,7 +31,7 @@ const Navbar: React.FC = () => {
   }, []);
 
   return (
-    <nav className="flex items-center justify-between w-full mx-auto pt-8 pb-16">
+    <nav className="flex items-center justify-between w-full mx-auto pt-4 md:pt-8 pb-8 md:pb-16">
       <div className="flex items-end">
         <Link href="/" onMouseEnter={onMouseEnter} onMouseLeave={onMouseLeave}>
           {isHovering ? (
@@ -54,6 +55,8 @@ const Navbar: React.FC = () => {
           )}
         </Link>
         <NavLink href="/">Home</NavLink>
+        <NavLink href="/posts">Posts</NavLink>
+        <NavLink href="/lists">Lists</NavLink>
         <NavLink href="/about">About</NavLink>
         <NavLink href="/Subscribe">Contact</NavLink>
       </div>

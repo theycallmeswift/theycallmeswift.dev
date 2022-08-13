@@ -26,25 +26,27 @@ const PostLayout = ({ children, post }: PostLayoutProps) => {
         image={urlForImage(post.coverImage).url()}
         publishDate={new Date(post.publishDate).toISOString()}
       />
-      <Container className="px-8 pb-16">
+      <Container className="px-4 md:px-8 pb-8 md:pb-16">
         <Navbar />
-        <article className="w-full">
+        <article className="w-full relative">
           <h1 className="mb-4 text-3xl text-black font-bold">{post.title}</h1>
-          <div className="flex flex-row items-center justify-between">
-            <div className="flex items-center">
+          <div className="flex flex-row">
+            <div>
               <Image
                 alt="Mike Swift"
-                height={24}
-                width={24}
+                height={45}
+                width={45}
                 sizes="20vw"
                 src="/avatar.jpg"
-                className="rounded-full"
+                className="rounded-full mr-2 max-w-[45px] md:max-w-[24px]"
               />
-              <p className="text-sm ml-2 text-gray-700">
-                Mike Swift • {humanReadableDate(post.publishDate)}
+            </div>
+            <div className="flex flex-col md:flex-row justify-between w-full">
+              <p className="text-sm">Mike Swift</p>
+              <p className="text-sm text-gray-500">
+                {humanReadableDate(post.publishDate)} • {readingTimeText}
               </p>
             </div>
-            <p className="text-sm text-gray-700">{readingTimeText}</p>
           </div>
           <div className="mt-6 prose">{children}</div>
         </article>

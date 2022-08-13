@@ -9,7 +9,7 @@ const Link: React.FC<LinkProps> = ({ href, children, className, ...props }) => {
 
   if (isInternal) {
     return (
-      <NextLink href={href}>
+      <NextLink href={href} passHref>
         <a className={rootClassName} {...props}>
           {children}
         </a>

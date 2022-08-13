@@ -15,7 +15,11 @@ const FooterLink = ({ href, ...props }: LinkProps) => (
 );
 
 const FooterColumn = ({ children }) => {
-  return <div className="flex flex-col space-y-4">{children}</div>;
+  return (
+    <div className="flex flex-col text-center md:text-left space-y-4">
+      {children}
+    </div>
+  );
 };
 
 const Copyright = () => (
@@ -26,12 +30,12 @@ const Copyright = () => (
 
 const Footer: React.FC<FooterProps> = () => {
   return (
-    <footer className="w-full pt-16">
+    <footer className="w-full pt-8 md:pt-16">
       <hr className="border-1 border-gray-200 mb-8" />
       <nav className="grid grid-cols-2 sm:grid-cols-5 gap-x-4 gap-y-10">
         <div className="col-span-2 sm:col-span-3 flex flex-col justify-between text-center sm:text-left">
           <div>
-            <h4 className="text-lg font-bold">They call me Swift.</h4>
+            <h1 className="text-lg font-bold">They call me Swift.</h1>
             <p className="text-sm italic">Thanks for reading!</p>
           </div>
           <div className="hidden sm:block">
@@ -39,12 +43,13 @@ const Footer: React.FC<FooterProps> = () => {
           </div>
         </div>
         <FooterColumn>
-          <FooterLink href="/">Home</FooterLink>
+          <FooterLink href="/posts">Posts</FooterLink>
+          <FooterLink href="/lists">Lists</FooterLink>
           <FooterLink href="/about">About</FooterLink>
           <FooterLink href="/newsletter">Subscribe</FooterLink>
-          <FooterLink href="/contact">Contact</FooterLink>
         </FooterColumn>
         <FooterColumn>
+          <FooterLink href="/contact">Contact</FooterLink>
           <FooterLink href="https://github.com/theycallmeswift/">
             GitHub
           </FooterLink>
