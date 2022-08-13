@@ -1,4 +1,5 @@
 import Link from "components/Link";
+import RoundedImage from "components/RoundedImage";
 import { serialize } from "next-mdx-remote/serialize";
 import rehypeAutolinkHeadings from "rehype-autolink-headings";
 import rehypePrism from "rehype-prism-plus";
@@ -30,4 +31,5 @@ export const mdxToHTML = async (source: string) => {
 
 export const mdxComponents = {
   a: Link,
+  img: RoundedImage,
 };
