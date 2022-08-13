@@ -1,7 +1,7 @@
 import type { HTMLAttributes } from "react";
 import type { LinkProps } from "components/Link";
 
-import config from "config/site.config.json";
+import config from "config/site.json";
 import Link from "components/Link";
 
 export type FooterProps = HTMLAttributes<HTMLElement>;

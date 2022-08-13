@@ -1,7 +1,7 @@
 import type { Post } from "lib/types";
 import type { GetServerSideProps } from "next";
 
-import config from "config/site.config.json";
+import config from "config/site.json";
 import RSS from "rss";
 import { sanityClient } from "lib/sanity";
 

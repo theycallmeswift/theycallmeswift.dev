@@ -3,7 +3,7 @@ import type { NextPage } from "next";
 import Container from "components/Container";
 import Link from "components/Link";
 import ShortBio from "components/ShortBio";
-import config from "config/site.config.json";
+import config from "config/site.json";
 import DefaultLayout from "layouts/DefaultLayout";
 import Image from "next/future/image";
 

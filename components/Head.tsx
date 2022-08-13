@@ -1,6 +1,6 @@
 import type { HTMLAttributes } from "react";
 
-import config from "config/site.config.json";
+import config from "config/site.json";
 import NextHead from "next/head";
 import { useRouter } from "next/router";
 

@@ -4,7 +4,7 @@ import Container from "components/Container";
 import Footer from "components/Footer";
 import Head from "components/Head";
 import Navbar from "components/Navbar";
-import { urlForImage, humanReadableDate } from "lib/sanity";
+import { urlForImage, humanReadableDate } from "lib/post";
 import Image from "next/future/image";
 import { Suspense } from "react";
 import readingTime from "reading-time";

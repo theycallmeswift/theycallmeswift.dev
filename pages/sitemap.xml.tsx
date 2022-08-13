@@ -1,6 +1,6 @@
 import type { GetServerSideProps } from "next";
 
-import config from "config/site.config.json";
+import config from "config/site.json";
 import { sanityClient } from "lib/sanity";
 
 const Sitemap = () => null;
