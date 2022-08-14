@@ -32,13 +32,13 @@ const Footer: React.FC<FooterProps> = () => {
   return (
     <footer className="w-full pt-8 md:pt-16">
       <hr className="border-1 border-gray-200 mb-8" />
-      <nav className="grid grid-cols-2 sm:grid-cols-5 gap-x-4 gap-y-10">
-        <div className="col-span-2 sm:col-span-3 flex flex-col justify-between text-center sm:text-left">
+      <nav className="grid grid-cols-2 md:grid-cols-5 gap-x-4 gap-y-10">
+        <div className="col-span-2 md:col-span-3 flex flex-col justify-between text-center md:text-left">
           <div>
             <h1 className="text-lg font-bold">They call me Swift.</h1>
             <p className="text-sm italic">Thanks for reading!</p>
           </div>
-          <div className="hidden sm:block">
+          <div className="hidden md:block">
             <Copyright />
           </div>
         </div>
@@ -57,7 +57,7 @@ const Footer: React.FC<FooterProps> = () => {
             Twitter
           </FooterLink>
         </FooterColumn>
-        <div className="sm:hidden col-span-2 text-center">
+        <div className="md:hidden col-span-2 text-center">
           <Copyright />
         </div>
       </nav>

@@ -2,9 +2,9 @@ import Link from "components/Link";
 import Image from "next/future/image";
 
 const ShortBio: React.FC = () => (
-  <div className="flex flex-col-reverse sm:flex-row items-start w-full justify-between pb-8">
-    <div className="flex flex-col sm:pr-8">
-      <h1 className="text-4xl sm:text-2xl font-bold mb-2">
+  <div className="flex flex-col-reverse md:flex-row items-start w-full justify-between pb-8">
+    <div className="flex flex-col md:pr-8">
+      <h1 className="text-4xl md:text-2xl font-bold mb-2">
         Hi there! You can call me Swift.
       </h1>
       <p className="prose">
@@ -18,9 +18,10 @@ const ShortBio: React.FC = () => (
       height={375}
       width={375}
       quality={100}
-      priority={true}
+      priority
+      sizes="30vw"
       src="/theycallmeswift-avatar.jpg"
-      className="rounded-lg mb-4 sm:mb-0 w-10/12 md:w-36"
+      className="rounded-lg mb-4 md:mb-0 w-36"
     />
   </div>
 );

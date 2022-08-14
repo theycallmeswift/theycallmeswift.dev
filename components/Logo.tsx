@@ -22,7 +22,7 @@ const Logo: React.FC = () => {
           alt="Glider Logo"
           height={20}
           width={20}
-          sizes="20vw"
+          sizes="10vw"
           src="/logo.gif"
           className="inline-block mr-6"
           priority
@@ -32,7 +32,7 @@ const Logo: React.FC = () => {
           alt="Glider Logo"
           height={20}
           width={20}
-          sizes="20vw"
+          sizes="10vw"
           src="/logo.png"
           className="inline-block mr-6"
           priority

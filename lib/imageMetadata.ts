@@ -59,6 +59,13 @@ const imageMetadata = () => {
       }
     });
 
+    // We're assuming the first image will appear above the fold. While that's
+    // not necessarily true 100% of the time, it's a fair estimation for a minor
+    // performance tradeoff.
+    if (images.length > 0) {
+      images[0].properties.priority = true;
+    }
+
     for (const image of images) {
       await addProps(image);
     }
