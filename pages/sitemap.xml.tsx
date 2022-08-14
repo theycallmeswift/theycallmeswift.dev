@@ -7,7 +7,7 @@ const Sitemap = () => null;
 
 const generateSitemap = (slugs: string[]) => {
   const urls = slugs.map((slug) => {
-    return `<url><loc>${config.site.url}/${slug}</loc></url>`;
+    return `<url><loc>${config.url}/${slug}</loc></url>`;
   });
 
   return `<?xml version="1.0" encoding="UTF-8"?>

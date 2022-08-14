@@ -25,18 +25,18 @@ const fetchAllPosts = (): Promise<Post[]> => {
 export const getServerSideProps: GetServerSideProps = async ({ res }) => {
   const posts = await fetchAllPosts();
   const feed = new RSS({
-    title: config.site.name,
-    site_url: config.site.url,
-    feed_url: config.site.feed,
+    title: config.name,
+    site_url: config.url,
+    feed_url: config.feed,
   });
 
   posts.map((post) => {
     feed.item({
       title: post.title,
-      url: `${config.site.url}/${post.slug}`,
+      url: `${config.url}/${post.slug}`,
       date: post.publishDate,
       description: post.excerpt,
-      author: config.site.author,
+      author: config.author,
     });
   });
 

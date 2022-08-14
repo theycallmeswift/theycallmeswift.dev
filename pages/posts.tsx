@@ -10,7 +10,7 @@ import { sanityClient } from "lib/sanity";
 
 const Posts: NextPage = ({ posts }: { posts: Post[] }) => {
   return (
-    <DefaultLayout>
+    <DefaultLayout title="All Posts">
       <Container>
         <div className="flex flex-row justify-between items-end border-b border-gray-200 mb-8 w-full">
           <h1 className="text-3xl font-bold">All Posts</h1>

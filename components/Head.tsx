@@ -6,7 +6,7 @@ import { useRouter } from "next/router";
 
 export type ContainerProps = HTMLAttributes<HTMLElement>;
 
-type HeadProps = {
+export type HeadProps = {
   title?: string;
   description?: string;
   image?: string;
@@ -16,9 +16,7 @@ type HeadProps = {
 
 const Head = ({ title, description, image, type, publishDate }: HeadProps) => {
   const router = useRouter();
-  const titleWithSiteName = title
-    ? `${title} - ${config.site.name}`
-    : config.site.name;
+  const titleWithSiteName = title ? `${title} - ${config.name}` : config.name;
 
   return (
     <NextHead>
@@ -30,23 +28,23 @@ const Head = ({ title, description, image, type, publishDate }: HeadProps) => {
       {publishDate && (
         <meta property="article:published_time" content={publishDate} />
       )}
-      <link rel="canonical" href={`${config.site.url}${router.asPath}`} />
+      <link rel="canonical" href={`${config.url}${router.asPath}`} />
 
       <meta name="robots" content="follow, index" />
       <meta key="googlebot" name="googlebot" content="follow, index" />
 
       <meta property="og:type" content={type || config.defaults.type} />
-      <meta property="og:site_name" content={config.site.name} />
+      <meta property="og:site_name" content={config.name} />
       <meta property="og:title" content={titleWithSiteName} />
       <meta
         property="og:description"
         content={description || config.defaults.description}
       />
-      <meta property="og:url" content={`${config.site.url}${router.asPath}`} />
+      <meta property="og:url" content={`${config.url}${router.asPath}`} />
       <meta property="og:image" content={image || config.defaults.image} />
 
       <meta name="twitter:card" content="summary_large_image" />
-      <meta name="twitter:site" content={config.site.twitter} />
+      <meta name="twitter:site" content={config.twitter} />
 
       <link
         rel="icon"

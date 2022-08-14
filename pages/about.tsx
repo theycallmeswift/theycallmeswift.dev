@@ -37,7 +37,7 @@ const ImageThumbnail = ({ src }: { src: string }) => {
 
 const About: NextPage = () => {
   return (
-    <DefaultLayout>
+    <DefaultLayout title="About">
       <Container>
         <ShortBio />
 
@@ -46,7 +46,7 @@ const About: NextPage = () => {
           <ul>
             <li>
               <strong>Website:</strong>{" "}
-              <Link href={config.site.url}>theycallmeswift.dev</Link>
+              <Link href={config.url}>theycallmeswift.dev</Link>
             </li>
             <li>
               <strong>Twitter:</strong>{" "}

@@ -1,15 +1,13 @@
 {
-  "site": {
-    "name": "They call me Swift.",
-    "author": "Mike Swift",
-    "twitter": "@SwiftAlphaOne",
-    "url": "https://theycallmeswift.dev",
-    "feed": "https://theycallmeswift.dev/feed.xml",
-    "sitemap": "https://theycallmeswift.dev/sitemap.xml"
-  },
+  "name": "They call me Swift.",
+  "author": "Mike Swift",
+  "twitter": "@SwiftAlphaOne",
+  "url": "https://theycallmeswift.dev",
+  "feed": "https://theycallmeswift.dev/feed.xml",
+  "sitemap": "https://theycallmeswift.dev/sitemap.xml",
   "defaults": {
+    "type": "website",
     "description": "The personal website and blog of a hacker, founder, and hackathon enthusiast.",
-    "image": "https://dummyimage.com/1200x630/fff/aaa",
-    "type": "website"
+    "image": "https://dummyimage.com/1200x630/fff/aaa"
   }
 }
