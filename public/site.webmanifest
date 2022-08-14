@@ -1,0 +1,27 @@
+{
+  "name": "They call me Swift.",
+  "short_name": "theycallmeswift.dev",
+  "icons": [
+    {
+      "src": "/favicons/android-chrome-192x192.png",
+      "sizes": "192x192",
+      "purpose": "maskable",
+      "type": "image/png"
+    },
+    {
+      "src": "/favicons/android-chrome-256x256.png",
+      "sizes": "256x256",
+      "purpose": "maskable",
+      "type": "image/png"
+    },
+    {
+      "src": "/favicons/favicons-512x512.png",
+      "sizes": "512x512",
+      "purpose": "maskable",
+      "type": "image/png"
+    }
+  ],
+  "theme_color": "#ffffff",
+  "background_color": "#ffffff",
+  "display": "standalone"
+}

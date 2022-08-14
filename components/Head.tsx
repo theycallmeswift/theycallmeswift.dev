@@ -47,6 +47,45 @@ const Head = ({ title, description, image, type, publishDate }: HeadProps) => {
 
       <meta name="twitter:card" content="summary_large_image" />
       <meta name="twitter:site" content={config.site.twitter} />
+
+      <link
+        rel="icon"
+        type="image/x-icon"
+        sizes="48x48"
+        href="/favicons/favicon.ico"
+      />
+      <link
+        rel="icon"
+        type="image/png"
+        sizes="16x16"
+        href="/favicons/favicon-16x16.png"
+      />
+      <link
+        rel="icon"
+        type="image/png"
+        sizes="32x32"
+        href="/favicons/favicon-32x32.png"
+      />
+      <link
+        rel="apple-touch-icon"
+        sizes="180x180"
+        href="/favicons/apple-touch-icon.png"
+      />
+      <link
+        rel="icon"
+        type="image/png"
+        sizes="512x512"
+        href="/favicons/favicon-512x512.png"
+      />
+
+      <link rel="manifest" href="/site.webmanifest" />
+      <link
+        rel="mask-icon"
+        href="/favicons/safari-pinned-tab.svg"
+        color="#ffffff"
+      />
+      <meta name="msapplication-TileColor" content="#b91d47" />
+      <meta content="#ffffff" name="theme-color" />
     </NextHead>
   );
 };
