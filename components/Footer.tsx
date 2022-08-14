@@ -23,7 +23,7 @@ const FooterColumn = ({ children }) => {
 };
 
 const Copyright = () => (
-  <p className="text-xs text-gray-400">
+  <p className="text-xs text-gray-500">
     &copy; 2012-present {config.site.author}. All Rights Reserved.
   </p>
 );

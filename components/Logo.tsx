@@ -25,6 +25,7 @@ const Logo: React.FC = () => {
           sizes="20vw"
           src="/logo.gif"
           className="inline-block mr-6"
+          priority
         />
       ) : (
         <Image
@@ -34,6 +35,7 @@ const Logo: React.FC = () => {
           sizes="20vw"
           src="/logo.png"
           className="inline-block mr-6"
+          priority
         />
       )}
     </Link>

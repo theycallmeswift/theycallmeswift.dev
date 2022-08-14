@@ -1,12 +1,24 @@
 import type { NextPage, GetStaticProps, GetStaticPaths } from "next";
 import type { Post } from "lib/types";
 
-import { mdxToHTML, mdxComponents } from "lib/mdx";
+import Link from "components/Link";
+import RoundedImage from "components/RoundedImage";
 import PostLayout from "layouts/PostLayout";
 import { sanityClient } from "lib/sanity";
+import imageMetadata from "lib/imageMetadata";
 import { MDXRemote } from "next-mdx-remote";
+import { serialize } from "next-mdx-remote/serialize";
+import rehypeAutolinkHeadings from "rehype-autolink-headings";
+import rehypePrism from "rehype-prism-plus";
+import rehypeSlug from "rehype-slug";
+import remarkGfm from "remark-gfm";
 
 const Post: NextPage = ({ post }: { post: Post }) => {
+  const mdxComponents = {
+    a: Link,
+    img: RoundedImage,
+  };
+
   return (
     <PostLayout post={post}>
       <MDXRemote {...post.html} components={mdxComponents} />
@@ -46,7 +58,25 @@ export const getStaticProps: GetStaticProps = async ({ params }) => {
     return { notFound: true };
   }
 
-  const html = await mdxToHTML(post.content);
+  const html = await serialize(post.content, {
+    mdxOptions: {
+      remarkPlugins: [remarkGfm],
+      rehypePlugins: [
+        imageMetadata,
+        rehypeSlug,
+        rehypePrism,
+        [
+          rehypeAutolinkHeadings,
+          {
+            properties: {
+              className: ["anchor"],
+            },
+          },
+        ],
+      ],
+      format: "mdx",
+    },
+  });
 
   return {
     props: {

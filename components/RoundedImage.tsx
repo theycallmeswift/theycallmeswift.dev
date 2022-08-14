@@ -9,11 +9,11 @@ export type RoundedImageProps = React.ImgHTMLAttributes<HTMLImageElement> &
 
 const RoundedImage = ({ alt = "", className, ...props }: RoundedImageProps) => {
   const rootClassName = clsx(
-    "object-contain !relative rounded-lg my-5 border border-gray-500",
+    "w-full rounded-lg my-5 border border-gray-500",
     className
   );
 
-  return <Image alt={alt} className={rootClassName} fill {...props} />;
+  return <Image alt={alt} className={rootClassName} {...props} />;
 };
 
 export default RoundedImage;
