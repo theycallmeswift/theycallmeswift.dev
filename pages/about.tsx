@@ -5,19 +5,29 @@ import Link from "components/Link";
 import ShortBio from "components/ShortBio";
 import config from "config/site.json";
 import DefaultLayout from "layouts/DefaultLayout";
+import { trackEvent } from "lib/analytics";
 import Image from "next/future/image";
 
 const ImageThumbnail = ({ src }: { src: string }) => {
   const filename = src.split(".")[0];
+  const trackDownload = () =>
+    trackEvent("headshot_downloaded", {
+      event_category: "Resources",
+      event_label: filename,
+    });
 
   return (
-    <Link href={`/${src}`} download={filename} target="_blank">
+    <Link
+      href={`/${src}`}
+      download={filename}
+      target="_blank"
+      onClick={trackDownload}
+    >
       <Image
         alt="Mike Swift"
         height={375}
         width={375}
         quality={100}
-        priority={true}
         src={`/${src}`}
         className="rounded-lg my-0"
       />
