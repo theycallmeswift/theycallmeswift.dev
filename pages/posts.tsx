@@ -6,7 +6,7 @@ import Link from "components/Link";
 import { RSSIcon } from "components/Icons";
 import PostSummary from "components/PostSummary";
 import DefaultLayout from "layouts/DefaultLayout";
-import { sanityClient } from "lib/sanity";
+import { getRecentPosts } from "lib/post";
 
 const Posts: NextPage = ({ posts }: { posts: Post[] }) => {
   return (
@@ -29,18 +29,7 @@ const Posts: NextPage = ({ posts }: { posts: Post[] }) => {
 };
 
 export const getStaticProps: GetStaticProps = async () => {
-  const recentPostsQuery = `
-    *[_type == "post"] | order(publishDate desc, _updatedAt desc) {
-      content,
-      _id,
-      title,
-      publishDate,
-      excerpt,
-      coverImage,
-      "slug": slug.current,
-    }`;
-
-  const posts: Post[] = await sanityClient.fetch(recentPostsQuery);
+  const posts: Post[] = await getRecentPosts();
 
   if (!posts) {
     return { notFound: true };

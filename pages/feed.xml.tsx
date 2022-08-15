@@ -1,29 +1,13 @@
-import type { Post } from "lib/types";
 import type { GetServerSideProps } from "next";
 
 import config from "config/site.json";
 import RSS from "rss";
-import { sanityClient } from "lib/sanity";
+import { getRecentPosts } from "lib/post";
 
 const Feed = () => null;
 
-const fetchAllPosts = (): Promise<Post[]> => {
-  const allPostsQuery = `
-    *[_type == "post"] | order(publishDate desc, _updatedAt desc) {
-      _id,
-      title,
-      publishDate,
-      excerpt,
-      coverImage,
-      "slug": slug.current,
-    }
-  `;
-
-  return sanityClient.fetch(allPostsQuery);
-};
-
 export const getServerSideProps: GetServerSideProps = async ({ res }) => {
-  const posts = await fetchAllPosts();
+  const posts = await getRecentPosts();
   const feed = new RSS({
     title: config.name,
     site_url: config.url,

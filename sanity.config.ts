@@ -31,15 +31,15 @@ export default createConfig({
             },
           },
           {
-            name: "content",
-            title: "Content",
-            type: "markdown",
-          },
-          {
             name: "excerpt",
             title: "Excerpt",
             type: "text",
-            validation: (rule) => rule.required(),
+            validation: (rule) => rule.required().max(255),
+          },
+          {
+            name: "content",
+            title: "Content",
+            type: "markdown",
           },
           {
             name: "coverImage",

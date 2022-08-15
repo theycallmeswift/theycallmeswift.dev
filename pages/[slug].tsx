@@ -6,7 +6,7 @@ import clsx from "clsx";
 import Link from "components/Link";
 import PostLayout from "layouts/PostLayout";
 import imageMetadata from "lib/imageMetadata";
-import { sanityClient } from "lib/sanity";
+import { getPostSlugs, getPostBy } from "lib/post";
 import NextImage from "next/future/image";
 import { MDXRemote } from "next-mdx-remote";
 import { serialize } from "next-mdx-remote/serialize";
@@ -37,9 +37,7 @@ const Post: NextPage = ({ post }: { post: Post }) => {
 };
 
 export const getStaticPaths: GetStaticPaths = async () => {
-  const allPostSlugsQuery =
-    '*[_type == "post" && defined(slug.current)][].slug.current';
-  const paths: string[] = await sanityClient.fetch(allPostSlugsQuery);
+  const paths: string[] = await getPostSlugs();
 
   return {
     paths: paths.map((slug) => ({ params: { slug } })),
@@ -48,21 +46,8 @@ export const getStaticPaths: GetStaticPaths = async () => {
 };
 
 export const getStaticProps: GetStaticProps = async ({ params }) => {
-  const postBySlugQuery = `{
-    "post": *[_type == "post" && slug.current == $slug] | order(_updatedAt desc) [0] {
-      content,
-      _id,
-      title,
-      publishDate,
-      excerpt,
-      coverImage,
-      "slug": slug.current,
-    }
-  }`;
-
-  const { post }: { post: Post } = await sanityClient.fetch(postBySlugQuery, {
-    slug: params?.slug,
-  });
+  const slug = params?.slug as string;
+  const post: Post = await getPostBy({ slug });
 
   if (!post) {
     return { notFound: true };

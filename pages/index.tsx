@@ -5,7 +5,7 @@ import Container from "components/Container";
 import PostSummary from "components/PostSummary";
 import ShortBio from "components/ShortBio";
 import DefaultLayout from "layouts/DefaultLayout";
-import { sanityClient } from "lib/sanity";
+import { getRecentPosts } from "lib/post";
 
 const Home: NextPage = ({ posts }: { posts: Post[] }) => {
   return (
@@ -25,18 +25,7 @@ const Home: NextPage = ({ posts }: { posts: Post[] }) => {
 };
 
 export const getStaticProps: GetStaticProps = async () => {
-  const recentPostsQuery = `
-    *[_type == "post"] | order(publishDate desc, _updatedAt desc) [0...3] {
-      content,
-      _id,
-      title,
-      publishDate,
-      excerpt,
-      coverImage,
-      "slug": slug.current,
-    }`;
-
-  const posts: Post[] = await sanityClient.fetch(recentPostsQuery);
+  const posts: Post[] = await getRecentPosts({ limit: 3 });
 
   if (!posts) {
     return { notFound: true };

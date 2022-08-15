@@ -1,7 +1,7 @@
 import type { Post } from "lib/types";
 
 import Link from "components/Link";
-import { humanReadableDate } from "lib/post";
+import { humanReadableDate } from "lib/helpers";
 
 const PostSummary = ({ post }: { post: Post }) => {
   return (

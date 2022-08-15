@@ -1,7 +1,7 @@
 import type { GetServerSideProps } from "next";
 
 import config from "config/site.json";
-import { sanityClient } from "lib/sanity";
+import { getPostSlugs } from "lib/post";
 
 const Sitemap = () => null;
 
@@ -17,15 +17,8 @@ const generateSitemap = (slugs: string[]) => {
   `;
 };
 
-const fetchAllPostSlugs = (): Promise<string[]> => {
-  const allPostSlugsQuery =
-    '*[_type == "post" && defined(slug.current)][].slug.current';
-
-  return sanityClient.fetch(allPostSlugsQuery);
-};
-
 export const getServerSideProps: GetServerSideProps = async ({ res }) => {
-  const posts = await fetchAllPostSlugs();
+  const posts = await getPostSlugs();
   const pages = [...posts, "", "posts", "about"];
 
   res.setHeader("Content-Type", "text/xml");
