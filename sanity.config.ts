@@ -31,15 +31,32 @@ export default createConfig({
             },
           },
           {
-            name: "content",
-            title: "Content",
-            type: "markdown",
+            name: "subtype",
+            title: "Post Type",
+            type: "string",
+            initialValue: "standard",
+            options: {
+              list: ["standard", "list"],
+            },
+            validation: (rule) => rule.required(),
           },
           {
             name: "excerpt",
             title: "Excerpt",
             type: "text",
             validation: (rule) => rule.required(),
+          },
+          {
+            name: "content",
+            title: "Content",
+            type: "markdown",
+          },
+          {
+            name: "items",
+            title: "List Items",
+            type: "array",
+            of: [{ type: "reference", to: [{ type: "list_item" }] }],
+            hidden: ({ document }) => document?.subtype != "list",
           },
           {
             name: "coverImage",
@@ -51,6 +68,49 @@ export default createConfig({
             name: "publishDate",
             title: "Publish Date",
             type: "datetime",
+            validation: (rule) => rule.required(),
+          },
+        ],
+      },
+
+      {
+        name: "list_item",
+        type: "document",
+        title: "List Item",
+        fields: [
+          {
+            name: "order",
+            title: "List Order",
+            type: "number",
+            validation: (rule) => [rule.required(), rule.min(1)],
+          },
+          {
+            name: "title",
+            title: "Item Title",
+            type: "string",
+            validation: (rule) => rule.required(),
+          },
+          {
+            name: "subtitle",
+            title: "Subtitle",
+            type: "string",
+            hidden: ({ document }) => !document?.title,
+          },
+          {
+            name: "description",
+            title: "Description",
+            type: "text",
+            validation: (rule) => rule.required(),
+          },
+          {
+            name: "purchaseUrl",
+            title: "URL",
+            type: "url",
+          },
+          {
+            name: "image",
+            title: "Image",
+            type: "image",
             validation: (rule) => rule.required(),
           },
         ],

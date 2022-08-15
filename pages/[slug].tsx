@@ -2,10 +2,11 @@ import type { NextPage, GetStaticProps, GetStaticPaths } from "next";
 import type { Post } from "lib/types";
 
 import Link from "components/Link";
-import RoundedImage from "components/RoundedImage";
+import ListItem from "components/ListItem";
 import PostLayout from "layouts/PostLayout";
 import { sanityClient } from "lib/sanity";
 import imageMetadata from "lib/imageMetadata";
+import Image from "next/future/image";
 import { MDXRemote } from "next-mdx-remote";
 import { serialize } from "next-mdx-remote/serialize";
 import rehypeAutolinkHeadings from "rehype-autolink-headings";
@@ -16,12 +17,21 @@ import remarkGfm from "remark-gfm";
 const Post: NextPage = ({ post }: { post: Post }) => {
   const mdxComponents = {
     a: Link,
-    img: RoundedImage,
+    img: Image,
   };
 
   return (
     <PostLayout post={post}>
-      <MDXRemote {...post.html} components={mdxComponents} />
+      <div className="prose">
+        <MDXRemote {...post.html} components={mdxComponents} />
+      </div>
+      {post.subtype == "list" && (
+        <div className="space-y-12 mt-8">
+          {post.items?.map((item) => (
+            <ListItem key={item.order} {...item} />
+          ))}
+        </div>
+      )}
     </PostLayout>
   );
 };
@@ -40,13 +50,15 @@ export const getStaticPaths: GetStaticPaths = async () => {
 export const getStaticProps: GetStaticProps = async ({ params }) => {
   const postBySlugQuery = `{
     "post": *[_type == "post" && slug.current == $slug] | order(_updatedAt desc) [0] {
-      content,
       _id,
       title,
-      publishDate,
-      excerpt,
-      coverImage,
       "slug": slug.current,
+      subtype,
+      excerpt,
+      content,
+      items[]->,
+      coverImage,
+      publishDate,
     }
   }`;
 

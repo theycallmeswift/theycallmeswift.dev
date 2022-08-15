@@ -48,7 +48,7 @@ const PostLayout = ({ children, post }: PostLayoutProps) => {
               </p>
             </div>
           </div>
-          <div className="mt-6 prose">{children}</div>
+          <div className="mt-6">{children}</div>
         </article>
         <Footer />
       </Container>
