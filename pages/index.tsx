@@ -24,8 +24,8 @@ const Home: NextPage = ({ posts }: { posts: Post[] }) => {
   );
 };
 
-export const getStaticProps: GetStaticProps = async () => {
-  const posts: Post[] = await getRecentPosts({ limit: 3 });
+export const getStaticProps: GetStaticProps = async ({ preview = false }) => {
+  const posts: Post[] = await getRecentPosts({ limit: 3, preview });
 
   if (!posts) {
     return { notFound: true };

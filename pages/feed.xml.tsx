@@ -6,8 +6,11 @@ import { getRecentPosts } from "lib/post";
 
 const Feed = () => null;
 
-export const getServerSideProps: GetServerSideProps = async ({ res }) => {
-  const posts = await getRecentPosts();
+export const getServerSideProps: GetServerSideProps = async ({
+  res,
+  preview = false,
+}) => {
+  const posts = await getRecentPosts({ preview });
   const feed = new RSS({
     title: config.name,
     site_url: config.url,

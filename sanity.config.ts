@@ -1,6 +1,38 @@
+import type { SanityDocument, DocumentActionComponent, Slug } from "sanity";
+
 import { createConfig } from "sanity";
 import { deskTool } from "sanity/desk";
 import { markdownSchema } from "sanity-plugin-markdown";
+import { EyeIcon } from "./components/Icons";
+
+type PostDraft = SanityDocument & {
+  slug: Slug;
+};
+
+const PreviewAction: DocumentActionComponent = (props) => {
+  const defaultProps = {
+    label: "Preview Draft",
+    icon: EyeIcon,
+    disabled: true,
+  };
+  const draft = props.draft as PostDraft;
+
+  console.log(draft);
+  if (!draft || !draft.slug?.current) {
+    return defaultProps;
+  }
+
+  // TODO: Figure out how to append SANITY_PREVIEW_SECRET to URL when environment
+  // variables are accessible. See: https://github.com/sanity-io/sanity/discussions/3328
+  const previewUrl = `http://localhost:3000/api/preview?&slug=${draft.slug.current}`;
+  const onHandle = () => window.open(previewUrl, "_blank");
+
+  return {
+    ...defaultProps,
+    disabled: false,
+    onHandle,
+  };
+};
 
 export default createConfig({
   name: "default",
@@ -8,6 +40,9 @@ export default createConfig({
   projectId: "cg5yd6in",
   dataset: "production",
   plugins: [deskTool(), markdownSchema()],
+  document: {
+    actions: (prev) => prev.concat([PreviewAction]),
+  },
   schema: {
     types: [
       {

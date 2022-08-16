@@ -17,8 +17,11 @@ const generateSitemap = (slugs: string[]) => {
   `;
 };
 
-export const getServerSideProps: GetServerSideProps = async ({ res }) => {
-  const posts = await getPostSlugs();
+export const getServerSideProps: GetServerSideProps = async ({
+  res,
+  preview = false,
+}) => {
+  const posts = await getPostSlugs({ preview });
   const pages = [...posts, "", "posts", "about"];
 
   res.setHeader("Content-Type", "text/xml");

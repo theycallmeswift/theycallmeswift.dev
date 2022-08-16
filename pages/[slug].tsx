@@ -45,9 +45,12 @@ export const getStaticPaths: GetStaticPaths = async () => {
   };
 };
 
-export const getStaticProps: GetStaticProps = async ({ params }) => {
+export const getStaticProps: GetStaticProps = async ({
+  params,
+  preview = false,
+}) => {
   const slug = params?.slug as string;
-  const post: Post = await getPostBy({ slug });
+  const post: Post = await getPostBy({ slug, preview });
 
   if (!post) {
     return { notFound: true };

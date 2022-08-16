@@ -7,10 +7,11 @@
     "build": "next build",
     "start": "next start",
     "lint": "next lint",
-    "sanity-start": "sanity start"
+    "sanity": "sanity start"
   },
   "dependencies": {
     "@sanity/image-url": "^1.0.1",
+    "@sanity/webhook": "^2.0.0",
     "clsx": "^1.2.1",
     "next": "^12.2.4",
     "next-mdx-remote": "^4.1.0",
