@@ -1,7 +1,12 @@
 import type { NextApiRequest, NextApiResponse } from "next";
-import type { Post } from "lib/types";
+import type { Slug } from "sanity";
 
 import { isValidSignature, SIGNATURE_HEADER_NAME } from "@sanity/webhook";
+
+type BodyPayload = {
+  _id: string;
+  slug: Slug;
+};
 
 export const config = {
   api: {
@@ -34,20 +39,19 @@ const handler = async (req: NextApiRequest, res: NextApiResponse) => {
   }
 
   try {
-    const { slug } = JSON.parse(body) as Post;
+    const { slug } = JSON.parse(body) as BodyPayload;
 
-    if (typeof slug !== "string" || !slug) {
-      console.log(body);
+    if (!slug || !slug.current) {
       return res.status(400).json({ message: "Invalid slug" });
     }
 
     await Promise.all([
       res.revalidate("/"),
       res.revalidate("/posts"),
-      res.revalidate(`/${slug}`),
+      res.revalidate(`/${slug.current}`),
     ]);
 
-    return res.status(200).json({ message: `Updated ${slug}` });
+    return res.status(200).json({ message: `Updated ${slug.current}` });
   } catch (err) {
     const message =
       err instanceof Error ? err.message : "Internal Server Error";
