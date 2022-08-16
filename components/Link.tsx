@@ -5,7 +5,7 @@ export type LinkProps = React.AnchorHTMLAttributes<HTMLAnchorElement>;
 
 const Link: React.FC<LinkProps> = ({ href, children, className, ...props }) => {
   const isInternal = href && (href.startsWith("/") || href.startsWith("#"));
-  const rootClassName = clsx("transition", className);
+  const rootClassName = clsx(className);
 
   if (isInternal) {
     return (

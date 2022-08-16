@@ -15,8 +15,15 @@ const PostSummary = ({ post }: { post: Post }) => {
         </span>
       </div>
       <p className="prose">{post.excerpt}</p>
-      <Link className="underline inline-block" href={`/posts/${post.slug}`}>
-        Read More &rarr;
+      <Link
+        role="group"
+        className="flex items-center group"
+        href={`/posts/${post.slug}`}
+      >
+        <span className="group-hover:underline">Read More</span>
+        <span className="text-sm shrink-0 ml-1 group-hover:ml-3 transition-all ease-out duration-300">
+          &rarr;
+        </span>
       </Link>
     </div>
   );
