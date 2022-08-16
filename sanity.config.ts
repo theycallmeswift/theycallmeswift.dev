@@ -1,3 +1,5 @@
+/// <reference types="vite/client" />
+
 import type { SanityDocument, DocumentActionComponent, Slug } from "sanity";
 
 import { createConfig } from "sanity";
@@ -8,12 +10,6 @@ import { EyeIcon } from "./components/Icons";
 type PostDraft = SanityDocument & {
   slug: Slug;
 };
-
-interface ImportMetaWithEnv extends ImportMeta {
-  env?: {
-    [key: string]: string;
-  };
-}
 
 const PreviewAction: DocumentActionComponent = (props) => {
   const defaultProps = {
@@ -27,10 +23,8 @@ const PreviewAction: DocumentActionComponent = (props) => {
     return defaultProps;
   }
 
-  const url = (import.meta as ImportMetaWithEnv).env
-    ?.SANITY_STUDIO_PREVIEW_URL as string;
-  const secret = (import.meta as ImportMetaWithEnv).env
-    ?.SANITY_STUDIO_PREVIEW_SECRET as string;
+  const url = import.meta.env?.SANITY_STUDIO_PREVIEW_URL as string;
+  const secret = import.meta.env?.SANITY_STUDIO_PREVIEW_SECRET as string;
   const previewUrl = `${url}/api/preview?secret=${secret}&slug=${draft.slug.current}`;
   const onHandle = () => window.open(previewUrl, "_blank");
 
