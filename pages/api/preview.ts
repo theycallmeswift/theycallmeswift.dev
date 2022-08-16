@@ -3,9 +3,9 @@ import { getPostBy } from "lib/post";
 
 const handler = async (req: NextApiRequest, res: NextApiResponse) => {
   const slug = req.query.slug as string;
-  const secret = process.env.SANITY_PREVIEW_SECRET as string;
+  const secret = process.env.SANITY_STUDIO_PREVIEW_SECRET as string;
 
-  if (!slug || (secret && req.query.secret !== secret)) {
+  if (!slug || req.query.secret !== secret) {
     return res.status(401).json({ message: "Invalid request" });
   }
 

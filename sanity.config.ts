@@ -9,6 +9,12 @@ type PostDraft = SanityDocument & {
   slug: Slug;
 };
 
+interface ImportMetaWithEnv extends ImportMeta {
+  env?: {
+    [key: string]: string;
+  };
+}
+
 const PreviewAction: DocumentActionComponent = (props) => {
   const defaultProps = {
     label: "Preview Draft",
@@ -17,14 +23,15 @@ const PreviewAction: DocumentActionComponent = (props) => {
   };
   const draft = props.draft as PostDraft;
 
-  console.log(draft);
   if (!draft || !draft.slug?.current) {
     return defaultProps;
   }
 
-  // TODO: Figure out how to append SANITY_PREVIEW_SECRET to URL when environment
-  // variables are accessible. See: https://github.com/sanity-io/sanity/discussions/3328
-  const previewUrl = `http://localhost:3000/api/preview?&slug=${draft.slug.current}`;
+  const url = (import.meta as ImportMetaWithEnv).env
+    ?.SANITY_STUDIO_PREVIEW_URL as string;
+  const secret = (import.meta as ImportMetaWithEnv).env
+    ?.SANITY_STUDIO_PREVIEW_SECRET as string;
+  const previewUrl = `${url}/api/preview?secret=${secret}&slug=${draft.slug.current}`;
   const onHandle = () => window.open(previewUrl, "_blank");
 
   return {
