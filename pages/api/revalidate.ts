@@ -37,6 +37,7 @@ const handler = async (req: NextApiRequest, res: NextApiResponse) => {
     const { slug } = JSON.parse(body) as Post;
 
     if (typeof slug !== "string" || !slug) {
+      console.log(body);
       return res.status(400).json({ message: "Invalid slug" });
     }
 
