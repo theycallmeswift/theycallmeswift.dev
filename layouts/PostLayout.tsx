@@ -37,7 +37,7 @@ const PostLayout = ({ children, post }: PostLayoutProps) => {
                 height={45}
                 width={45}
                 sizes="20vw"
-                src="/theycallmeswift-avatar.jpg"
+                src="/downloads/theycallmeswift-avatar.jpg"
                 className="rounded-full mr-2 max-w-[45px] md:max-w-[24px]"
               />
             </div>
