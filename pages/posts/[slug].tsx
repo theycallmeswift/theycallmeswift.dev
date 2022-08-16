@@ -4,6 +4,7 @@ import type { ImageProps } from "next/future/image";
 
 import clsx from "clsx";
 import Link from "components/Link";
+import ListItem from "components/ListItem";
 import PostLayout from "layouts/PostLayout";
 import imageMetadata from "lib/imageMetadata";
 import { getPostSlugs, getPostBy } from "lib/post";
@@ -27,6 +28,7 @@ const Post: NextPage = ({ post }: { post: Post }) => {
   const mdxComponents = {
     a: Link,
     img: Image,
+    ListItem: ListItem,
   };
 
   return (

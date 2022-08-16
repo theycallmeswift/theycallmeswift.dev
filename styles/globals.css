@@ -23,6 +23,14 @@ h6 {
   @apply font-serif;
 }
 
+/* Linkbox */
+
+a.cover:before {
+  @apply h-full w-full absolute block inset-0;
+
+  content: "";
+}
+
 /* Prose Styles */
 .prose .anchor {
   @apply absolute invisible no-underline w-full;
