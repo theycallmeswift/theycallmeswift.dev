@@ -18,7 +18,7 @@ const ImageThumbnail = ({ src }: { src: string }) => {
 
   return (
     <Link
-      href={`/${src}`}
+      href={`/downloads/${src}`}
       download={filename}
       target="_blank"
       onClick={trackDownload}
@@ -28,7 +28,7 @@ const ImageThumbnail = ({ src }: { src: string }) => {
         height={375}
         width={375}
         quality={100}
-        src={`/${src}`}
+        src={`/downloads/${src}`}
         className="rounded-lg my-0"
       />
     </Link>

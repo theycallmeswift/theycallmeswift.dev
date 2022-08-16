@@ -48,7 +48,7 @@ const handler = async (req: NextApiRequest, res: NextApiResponse) => {
     await Promise.all([
       res.revalidate("/"),
       res.revalidate("/posts"),
-      res.revalidate(`/${slug.current}`),
+      res.revalidate(`/posts/${slug.current}`),
     ]);
 
     return res.status(200).json({ message: `Updated ${slug.current}` });

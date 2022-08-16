@@ -16,7 +16,7 @@ const handler = async (req: NextApiRequest, res: NextApiResponse) => {
   }
 
   res.setPreviewData({});
-  res.writeHead(307, { Location: `/${post.slug}` });
+  res.writeHead(307, { Location: `/posts/${post.slug}` });
   res.end();
 };
 

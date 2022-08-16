@@ -23,7 +23,7 @@ const Logo: React.FC = () => {
           height={20}
           width={20}
           sizes="10vw"
-          src="/logo.gif"
+          src="/logos/logo.gif"
           className="inline-block mr-6"
           priority
         />
@@ -33,7 +33,7 @@ const Logo: React.FC = () => {
           height={20}
           width={20}
           sizes="10vw"
-          src="/logo.png"
+          src="/logos/logo.png"
           className="inline-block mr-6"
           priority
         />

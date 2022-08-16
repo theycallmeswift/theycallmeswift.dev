@@ -21,7 +21,9 @@ export const getServerSideProps: GetServerSideProps = async ({
   res,
   preview = false,
 }) => {
-  const posts = await getPostSlugs({ preview });
+  const posts = (await getPostSlugs({ preview })).map(
+    (slug) => `posts/${slug}`
+  );
   const pages = [...posts, "", "posts", "about"];
 
   res.setHeader("Content-Type", "text/xml");

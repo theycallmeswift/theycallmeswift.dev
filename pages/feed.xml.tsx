@@ -20,7 +20,7 @@ export const getServerSideProps: GetServerSideProps = async ({
   posts.map((post) => {
     feed.item({
       title: post.title,
-      url: `${config.url}/${post.slug}`,
+      url: `${config.url}/posts/${post.slug}`,
       date: post.publishDate,
       description: post.excerpt,
       author: config.author,

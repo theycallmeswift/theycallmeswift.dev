@@ -20,7 +20,7 @@ const ShortBio: React.FC = () => (
       quality={100}
       priority
       sizes="(min-width: 640px) 30vw, 20vw"
-      src="/theycallmeswift-avatar.jpg"
+      src="/downloads/theycallmeswift-avatar.jpg"
       className="rounded-lg mb-4 md:mb-0 w-36"
     />
   </div>
