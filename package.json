@@ -15,7 +15,7 @@
     "clsx": "^1.2.1",
     "next": "^12.2.4",
     "next-mdx-remote": "^4.1.0",
-    "next-sanity": "^0.7.0",
+    "next-sanity": "^0.8.1",
     "plaiceholder": "^2.4.0",
     "react": "18.2.0",
     "react-dom": "18.2.0",
