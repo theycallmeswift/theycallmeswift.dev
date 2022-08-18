@@ -9,7 +9,7 @@ import imageMetadata from "lib/imageMetadata";
 import { getPostSlugs, getPostBy } from "lib/post";
 import NextImage from "next/future/image";
 import { MDXRemote } from "next-mdx-remote";
-import { serialize } from "next-mdx-remote/serialize";
+import { serialize as serializeMDX } from "next-mdx-remote/serialize";
 import rehypeAutolinkHeadings from "rehype-autolink-headings";
 import rehypePrism from "rehype-prism-plus";
 import rehypeSlug from "rehype-slug";
@@ -23,6 +23,27 @@ const Image = ({
   return <NextImage className={rootClassName} {...props} />;
 };
 
+const serializeMarkdown = (markdown: string) =>
+  serializeMDX(markdown, {
+    mdxOptions: {
+      remarkPlugins: [remarkGfm],
+      rehypePlugins: [
+        imageMetadata,
+        rehypeSlug,
+        rehypePrism,
+        [
+          rehypeAutolinkHeadings,
+          {
+            properties: {
+              className: ["anchor"],
+            },
+          },
+        ],
+      ],
+      format: "mdx",
+    },
+  });
+
 const Post: NextPage = ({ post }: { post: Post }) => {
   const mdxComponents = {
     a: Link,
@@ -31,7 +52,9 @@ const Post: NextPage = ({ post }: { post: Post }) => {
 
   return (
     <PostLayout post={post}>
-      <MDXRemote {...post.html} components={mdxComponents} />
+      {post.contentType === "markdown" && (
+        <MDXRemote {...post.html} components={mdxComponents} />
+      )}
     </PostLayout>
   );
 };
@@ -56,30 +79,17 @@ export const getStaticProps: GetStaticProps = async ({
     return { notFound: true };
   }
 
-  const html = await serialize(post.content, {
-    mdxOptions: {
-      remarkPlugins: [remarkGfm],
-      rehypePlugins: [
-        imageMetadata,
-        rehypeSlug,
-        rehypePrism,
-        [
-          rehypeAutolinkHeadings,
-          {
-            properties: {
-              className: ["anchor"],
-            },
-          },
-        ],
-      ],
-      format: "mdx",
-    },
-  });
+  const isMarkdown = post.contentType === "markdown";
+  const raw = isMarkdown ? post.markdown : post.portabletext;
+  const html = isMarkdown
+    ? await serializeMarkdown(post.markdown)
+    : await Promise.resolve(post.portabletext);
 
   return {
     props: {
       post: {
         ...post,
+        raw,
         html,
       },
     },

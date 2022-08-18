@@ -2,6 +2,15 @@ import type { Post } from "lib/types";
 
 import { getClient } from "lib/sanity";
 
+const COMMON_FIELDS = `
+  _id,
+  title,
+  publishDate,
+  excerpt,
+  coverImage,
+  "slug": slug.current,
+`;
+
 export const getPostBy = ({
   preview = false,
   slug,
@@ -11,13 +20,10 @@ export const getPostBy = ({
 }): Promise<Post> => {
   const sanityClient = getClient(preview);
   const query = `*[_type == "post" && slug.current == $slug] | order(_updatedAt desc) [0] {
-      content,
-      _id,
-      title,
-      publishDate,
-      excerpt,
-      coverImage,
-      "slug": slug.current,
+      ${COMMON_FIELDS}
+      contentType,
+      markdown,
+      portabletext,
     }`;
 
   return sanityClient.fetch(query, { slug });
@@ -34,12 +40,7 @@ export const getRecentPosts = ({
   const limitQuery = limit ? `[0...${limit}]` : "";
   const query = `
     *[_type == "post"] | order(publishDate desc, _updatedAt desc) ${limitQuery} {
-      _id,
-      title,
-      publishDate,
-      excerpt,
-      coverImage,
-      "slug": slug.current,
+      ${COMMON_FIELDS}
     }`;
 
   return sanityClient.fetch(query);

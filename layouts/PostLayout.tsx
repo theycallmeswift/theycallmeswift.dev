@@ -15,7 +15,7 @@ interface PostLayoutProps {
 }
 
 const PostLayout = ({ children, post }: PostLayoutProps) => {
-  const readingTimeText = readingTime(post.content).text;
+  const readingTimeText = readingTime(post.raw || "").text;
 
   return (
     <Suspense>

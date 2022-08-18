@@ -43,9 +43,29 @@ export default createConfig({
             validation: (rule) => rule.required().max(255),
           },
           {
-            name: "content",
+            name: "contentType",
+            title: "Content Type",
+            type: "string",
+            initialValue: "portabletext",
+            options: {
+              list: [
+                { title: "Rich Text", value: "portabletext" },
+                { title: "Markdown", value: "markdown" },
+              ],
+            },
+          },
+          {
+            name: "markdown",
             title: "Content",
             type: "markdown",
+            hidden: ({ document }) => document?.contentType !== "markdown",
+          },
+          {
+            name: "portabletext",
+            title: "Content",
+            type: "array",
+            of: [{ type: "block" }],
+            hidden: ({ document }) => document?.contentType !== "portabletext",
           },
           {
             name: "coverImage",
