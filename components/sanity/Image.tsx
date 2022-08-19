@@ -8,7 +8,8 @@ import NextImage from "next/future/image";
 
 type PortableTextImage = Image & {
   _type: "image";
-  priority: boolean;
+  alt?: string;
+  priority?: boolean;
 };
 
 const SanityImage: PortableTextTypeComponent<PortableTextImage> = ({
@@ -28,6 +29,7 @@ const SanityImage: PortableTextTypeComponent<PortableTextImage> = ({
       width={width}
       priority={priority}
       height={height}
+      alt={value.alt}
     />
   );
 };

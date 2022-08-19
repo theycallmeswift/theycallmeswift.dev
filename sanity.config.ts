@@ -56,6 +56,11 @@ export default createConfig({
                 type: "image",
                 fields: [
                   {
+                    name: "alt",
+                    title: "Alt Text",
+                    type: "string",
+                  },
+                  {
                     name: "priority",
                     title: "Priority Load",
                     type: "boolean",
