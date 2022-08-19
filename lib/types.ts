@@ -1,26 +1,15 @@
 import type { Image } from "@sanity/types";
-import type { MDXRemoteSerializeResult } from "next-mdx-remote";
+import type { PortableTextBlock } from "@portabletext/types";
 
-interface BasePost {
+export interface Post {
   _id: string;
   slug: string;
   title: string;
   publishDate: string;
   excerpt: string;
   coverImage: Image;
+  content?: PortableTextBlock[];
   raw: string;
 }
 
-type MarkdownPost = BasePost & {
-  contentType: "markdown";
-  markdown: string;
-  html: MDXRemoteSerializeResult;
-};
-
-type PortableTextPost = BasePost & {
-  contentType: "portabletext";
-  portabletext: string;
-  html: string;
-};
-
-export type Post = MarkdownPost | PortableTextPost;
+export default Post;

@@ -16,7 +16,7 @@ const Container: React.FC<ContainerProps> = ({
     "flex flex-col justify-center items-start w-full max-w-2xl mx-auto",
     className
   );
-  const Component = el as ComponentType<React.HTMLAttributes<HTMLElement>>;
+  const Component = el as ComponentType<HTMLAttributes<HTMLElement>>;
 
   return (
     <Component className={rootClassName} {...props}>

@@ -21,9 +21,7 @@ export const getPostBy = ({
   const sanityClient = getClient(preview);
   const query = `*[_type == "post" && slug.current == $slug] | order(_updatedAt desc) [0] {
       ${COMMON_FIELDS}
-      contentType,
-      markdown,
-      portabletext,
+      content,
     }`;
 
   return sanityClient.fetch(query, { slug });

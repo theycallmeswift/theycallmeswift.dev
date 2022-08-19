@@ -4,7 +4,7 @@ import Container from "components/Container";
 import Footer from "components/Footer";
 import Head from "components/Head";
 import Navbar from "components/Navbar";
-import { urlForImage, humanReadableDate } from "lib/helpers";
+import { getImageUrls, humanReadableDate } from "lib/helpers";
 import Image from "next/future/image";
 import { Suspense } from "react";
 import readingTime from "reading-time";
@@ -15,7 +15,7 @@ interface PostLayoutProps {
 }
 
 const PostLayout = ({ children, post }: PostLayoutProps) => {
-  const readingTimeText = readingTime(post.raw || "").text;
+  const readingTimeText = readingTime(post.raw).text;
 
   return (
     <Suspense>
@@ -23,7 +23,7 @@ const PostLayout = ({ children, post }: PostLayoutProps) => {
         title={post.title}
         description={post.excerpt}
         type="article"
-        image={urlForImage(post.coverImage).url()}
+        image={getImageUrls(post.coverImage).src}
         publishDate={new Date(post.publishDate).toISOString()}
       />
       <Container className="px-4 md:px-8 pb-8 md:pb-16">

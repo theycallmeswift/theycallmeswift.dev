@@ -1,59 +1,37 @@
 import type { Post } from "lib/types";
 import type { NextPage, GetStaticProps, GetStaticPaths } from "next";
-import type { ImageProps } from "next/future/image";
 
-import clsx from "clsx";
-import Link from "components/Link";
+import SanityCode from "components/sanity/Code";
+import SanityHeading from "components/sanity/Heading";
+import SanityImage from "components/sanity/Image";
+import SanityLink from "components/sanity/Link";
 import PostLayout from "layouts/PostLayout";
-import imageMetadata from "lib/imageMetadata";
 import { getPostSlugs, getPostBy } from "lib/post";
-import NextImage from "next/future/image";
-import { MDXRemote } from "next-mdx-remote";
-import { serialize as serializeMDX } from "next-mdx-remote/serialize";
-import rehypeAutolinkHeadings from "rehype-autolink-headings";
-import rehypePrism from "rehype-prism-plus";
-import rehypeSlug from "rehype-slug";
-import remarkGfm from "remark-gfm";
-
-const Image = ({
-  ...props
-}: React.ImgHTMLAttributes<HTMLImageElement> & ImageProps) => {
-  const rootClassName = clsx("w-full rounded-lg my-5 border border-gray-500");
-
-  return <NextImage className={rootClassName} {...props} />;
-};
-
-const serializeMarkdown = (markdown: string) =>
-  serializeMDX(markdown, {
-    mdxOptions: {
-      remarkPlugins: [remarkGfm],
-      rehypePlugins: [
-        imageMetadata,
-        rehypeSlug,
-        rehypePrism,
-        [
-          rehypeAutolinkHeadings,
-          {
-            properties: {
-              className: ["anchor"],
-            },
-          },
-        ],
-      ],
-      format: "mdx",
-    },
-  });
+import { PortableText, toPlainText } from "@portabletext/react";
 
 const Post: NextPage = ({ post }: { post: Post }) => {
-  const mdxComponents = {
-    a: Link,
-    img: Image,
+  const components = {
+    types: {
+      image: SanityImage,
+      code: SanityCode,
+    },
+    marks: {
+      link: SanityLink,
+    },
+    block: {
+      h1: SanityHeading,
+      h2: SanityHeading,
+      h3: SanityHeading,
+      h4: SanityHeading,
+      h5: SanityHeading,
+      h6: SanityHeading,
+    },
   };
 
   return (
     <PostLayout post={post}>
-      {post.contentType === "markdown" && (
-        <MDXRemote {...post.html} components={mdxComponents} />
+      {post.content && (
+        <PortableText value={post.content} components={components} />
       )}
     </PostLayout>
   );
@@ -79,18 +57,13 @@ export const getStaticProps: GetStaticProps = async ({
     return { notFound: true };
   }
 
-  const isMarkdown = post.contentType === "markdown";
-  const raw = isMarkdown ? post.markdown : post.portabletext;
-  const html = isMarkdown
-    ? await serializeMarkdown(post.markdown)
-    : await Promise.resolve(post.portabletext);
+  const raw = post.content ? toPlainText(post.content) : "";
 
   return {
     props: {
       post: {
         ...post,
         raw,
-        html,
       },
     },
   };

@@ -46,6 +46,14 @@ h6 {
 }
 
 /* Codeblock Styles */
+.code > span a {
+  @apply inline-block text-xs px-3 py-2 rounded-t-lg absolute top-0 right-8
+         -translate-y-full font-mono no-underline hover:text-pink-500;
+
+  background: var(--tw-prose-pre-bg);
+  color: var(--tw-prose-pre-code);
+}
+
 .token.comment,
 .token.prolog,
 .token.doctype,

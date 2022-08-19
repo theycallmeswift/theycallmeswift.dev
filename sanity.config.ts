@@ -1,16 +1,20 @@
 /// <reference types="vite/client" />
 
-import PreviewAction from "./lib/studio/PreviewAction";
+import PreviewAction from "./components/sanity/PreviewAction";
+import config from "./config/site.json";
 import { createConfig } from "sanity";
 import { deskTool } from "sanity/desk";
-import { markdownSchema } from "sanity-plugin-markdown";
+import { codeInput } from "@sanity/code-input";
+
+const projectId = import.meta.env.SANITY_STUDIO_PROJECT_ID as string;
+const dataset = import.meta.env.SANITY_STUDIO_DATASET as string;
 
 export default createConfig({
   name: "default",
-  title: "theycallmeswift.dev",
-  projectId: "cg5yd6in",
-  dataset: "production",
-  plugins: [deskTool(), markdownSchema()],
+  title: config.name,
+  projectId,
+  dataset,
+  plugins: [deskTool(), codeInput()],
   document: {
     actions: (prev) => prev.concat([PreviewAction]),
   },
@@ -43,29 +47,33 @@ export default createConfig({
             validation: (rule) => rule.required().max(255),
           },
           {
-            name: "contentType",
-            title: "Content Type",
-            type: "string",
-            initialValue: "portabletext",
-            options: {
-              list: [
-                { title: "Rich Text", value: "portabletext" },
-                { title: "Markdown", value: "markdown" },
-              ],
-            },
-          },
-          {
-            name: "markdown",
-            title: "Content",
-            type: "markdown",
-            hidden: ({ document }) => document?.contentType !== "markdown",
-          },
-          {
-            name: "portabletext",
+            name: "content",
             title: "Content",
             type: "array",
-            of: [{ type: "block" }],
-            hidden: ({ document }) => document?.contentType !== "portabletext",
+            of: [
+              { type: "block" },
+              { type: "image" },
+              {
+                type: "code",
+                options: {
+                  withFilename: true,
+                  language: "text",
+                  languageAlternatives: [
+                    { title: "CSS", value: "css" },
+                    { title: "HTML", value: "html" },
+                    { title: "JavaScript", value: "jsx" },
+                    { title: "JSON", value: "json" },
+                    { title: "Python", value: "python" },
+                    { title: "Ruby", value: "ruby" },
+                    { title: "Shell", value: "shell-session" },
+                    { title: "SQL", value: "sql" },
+                    { title: "TypeScript", value: "tsx" },
+                    { title: "YAML", value: "yaml" },
+                    { title: "Unknown", value: "text" },
+                  ],
+                },
+              },
+            ],
           },
           {
             name: "coverImage",

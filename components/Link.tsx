@@ -3,7 +3,7 @@ import NextLink from "next/link";
 
 export type LinkProps = React.AnchorHTMLAttributes<HTMLAnchorElement>;
 
-const Link: React.FC<LinkProps> = ({ href, children, className, ...props }) => {
+const Link = ({ href, children, className, ...props }: LinkProps) => {
   const isInternal = href && (href.startsWith("/") || href.startsWith("#"));
   const rootClassName = clsx(className);
 
