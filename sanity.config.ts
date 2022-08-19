@@ -52,7 +52,17 @@ export default createConfig({
             type: "array",
             of: [
               { type: "block" },
-              { type: "image" },
+              {
+                type: "image",
+                fields: [
+                  {
+                    name: "priority",
+                    title: "Priority Load",
+                    type: "boolean",
+                    initialValue: false,
+                  },
+                ],
+              },
               {
                 type: "code",
                 options: {

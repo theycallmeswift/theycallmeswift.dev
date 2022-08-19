@@ -8,6 +8,7 @@ import NextImage from "next/future/image";
 
 type PortableTextImage = Image & {
   _type: "image";
+  priority: boolean;
 };
 
 const SanityImage: PortableTextTypeComponent<PortableTextImage> = ({
@@ -16,6 +17,7 @@ const SanityImage: PortableTextTypeComponent<PortableTextImage> = ({
   const { width, height } = getImageDimensions(value);
   const { src, blurDataURL } = getImageUrls(value);
   const rootClassName = clsx("w-full rounded-lg my-5 border border-gray-500");
+  const priority = value.priority ?? false;
 
   return (
     <NextImage
@@ -24,6 +26,7 @@ const SanityImage: PortableTextTypeComponent<PortableTextImage> = ({
       placeholder="blur"
       blurDataURL={blurDataURL}
       width={width}
+      priority={priority}
       height={height}
     />
   );
