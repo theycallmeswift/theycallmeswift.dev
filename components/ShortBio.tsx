@@ -13,16 +13,21 @@ const ShortBio: React.FC = () => (
         I&apos;m helping the next generation of developers launch their careers.
       </p>
     </div>
-    <Image
-      alt="Mike Swift"
-      height={375}
-      width={375}
-      quality={100}
-      priority
-      sizes="(min-width: 640px) 30vw, 20vw"
-      src="/downloads/theycallmeswift-avatar.jpg"
-      className="rounded-lg mb-4 md:mb-0 w-36"
-    />
+    <Link
+      href="/about"
+      className="mb-4 md:mb-0 shrink-0 w-36 hover:rotate-2 transition ease-in-out"
+    >
+      <Image
+        alt="Mike Swift"
+        height={375}
+        width={375}
+        quality={100}
+        priority
+        sizes="(min-width: 640px) 30vw, 20vw"
+        src="/downloads/theycallmeswift-avatar.jpg"
+        className="rounded-lg"
+      />
+    </Link>
   </div>
 );
 export default ShortBio;
